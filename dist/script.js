@@ -1,6 +1,56 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/modules/modals.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/modals.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const modals = () => {
+  function bindModal(triggerSelector, modalSelector, closeSelector) {
+    const trigger = document.querySelectorAll(triggerSelector),
+      modal = document.querySelector(modalSelector),
+      close = document.querySelector(closeSelector);
+    trigger.forEach(item => {
+      item.addEventListener('click', e => {
+        if (e.target) {
+          e.preventDefault();
+        }
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    close.addEventListener('click', () => {
+      modal.style.display = "none";
+      document.body.style.overflow = '';
+    });
+    modal.addEventListener('click', e => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = '';
+      }
+    });
+  }
+  function showModalByTime(selector, time) {
+    setTimeout(() => {
+      document.querySelector(selector).style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }, time);
+  }
+  bindModal(".popup_engineer_btn", '.popup_engineer', '.popup_engineer .popup_close');
+  bindModal('.phone_link', '.popup', '.popup .popup_close');
+  //showModalByTime('.popup', 60000);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modals);
+
+/***/ }),
+
 /***/ "./src/js/slider.js":
 /*!**************************!*\
   !*** ./src/js/slider.js ***!
@@ -15,7 +65,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(slick_carousel__WEBPACK_IMPORTED_MODULE_1__);
 
 
-jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(function () {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.glazing_slider').slick({
     infinite: true,
     slidesToShow: 5,
@@ -13912,9 +13962,14 @@ var __webpack_exports__ = {};
   \************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./slider */ "./src/js/slider.js");
+/* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
 
 
 
+
+window.addEventListener('DOMContentLoaded', () => {
+  (0,_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])();
+});
 })();
 
 /******/ })()
