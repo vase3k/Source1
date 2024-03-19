@@ -1,8 +1,7 @@
 const images = () => {
     const imgPopup = document.createElement('div'),
         workSection = document.querySelector('.works'),
-        bigImage = document.createElement('img'),
-        overflowBody = document.querySelector('body');
+        bigImage = document.createElement('img');
 
     imgPopup.classList.add('popup');
     workSection.appendChild(imgPopup);
@@ -20,13 +19,14 @@ const images = () => {
 
         if (target && target.classList.contains('preview')) {
             imgPopup.style.display = 'flex';
-            overflowBody.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden';
             const path = target.parentNode.getAttribute('href');
             bigImage.setAttribute('src', path);
         }
 
         if (target && target.matches('div.popup')) {
             imgPopup.style.display = 'none';
+            document.body.style.overflow = '';
         }
     });
 };
